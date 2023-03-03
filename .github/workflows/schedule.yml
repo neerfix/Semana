@@ -1,0 +1,41 @@
+name: Get my place on Semana
+on:
+  push:
+  workflow_dispatch:  
+  schedule:
+    - cron: "30 0 * * 1"
+jobs:
+  curl-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get my place on semana for all days
+        id: loop
+        run: |
+          echo "Looping over days"
+          echo "${{ toJson(steps.loop.outputs) }}"
+          for i in {0..6}; do
+            day=$(date --date="6 weeks $i days" +%Y-%m-%d)
+            if [ $(date -d "$day" +%u) -le 5 ]; then
+              echo "Processing day '$day'"
+              curl 'https://app.semana.io/api/bookings/' \
+                -H 'authority: app.semana.io' \
+                -H 'accept: */*' \
+                -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' \
+                -H 'cache-control: no-cache' \
+                -H 'content-type: application/json' \
+                -H 'cookie: ${{ secrets.COOKIE }}' \
+                -H 'origin: https://app.semana.io' \
+                -H 'pragma: no-cache' \
+                -H 'referer: https://app.semana.io/cospirit/floorplan?d=2023-04-14&f=740' \
+                -H 'sec-ch-ua: "Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"' \
+                -H 'sec-ch-ua-mobile: ?0' \
+                -H 'sec-ch-ua-platform: "Linux"' \
+                -H 'sec-fetch-dest: empty' \
+                -H 'sec-fetch-mode: cors' \
+                -H 'sec-fetch-site: same-origin' \
+                -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' \
+                -H 'x-client-version: 2.37.1' \
+                --data-raw '{"collaboratorId":'${{ secrets.COLLABORATOR_ID }}',"type":"office","date":"'$day'","deskId":"'${{ secrets.DESK_ID }}'","period":"day"}' \
+                --compressed
+            fi
+          done
