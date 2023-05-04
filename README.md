@@ -1,7 +1,9 @@
 # Semana
-Automation of space taking on Semana with github Actions schedule.
+Automation of space taking on Semana with github Actions schedule. All Monday at 00:30am, the script it's run to get your place on all days in 6 weeks.
 
 ## Installation
+
+To get your information, open dev console and get the information in `POST` request to get your place.
 
 - Fork this repo.
 - Go to your `settings > Security > Secrets and variables > Actions` and add this :
