@@ -1,5 +1,5 @@
 # Semana
-Automation of space taking on Semana with github Actions schedule. All Monday at 00:30am, the script it's run to get your place on all days in 6 weeks.
+Automation of space taking on Semana with github Actions schedule. All Monday at 00:30am, the script run to get your place on all days in 6 weeks.
 
 ## Installation
 
