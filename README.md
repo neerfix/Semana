@@ -9,7 +9,7 @@ To get your information, open dev console and get the information in `POST` requ
 - Go to your `settings > Security > Secrets and variables > Actions` and add this :
 
   - `COLLABORATOR_ID` -> `your_collaborator_id`
-  - `COOKIE` -> `your_cookie`
+  - `COOKIE` -> `your_cookie` (3 cookies is set by semana, take `sid` cookie value.
   - `DESK_ID` -> `your_desk_id`
 
 Results :
