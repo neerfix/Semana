@@ -1,3 +1,5 @@
+![GitHub forks](https://img.shields.io/github/forks/nick-notararigo/semana?style=plastic)
+[![Get my place on Semana](https://github.com/nick-notararigo/Semana/actions/workflows/schedule.yml/badge.svg)](https://github.com/nick-notararigo/Semana/actions/workflows/schedule.yml)
 # Semana
 Automation of space taking on Semana with github Actions schedule. All Monday at 00:30am, the script run to get your place on all days in 6 weeks.
 
