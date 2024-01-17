@@ -24,7 +24,7 @@ jobs:
               echo "Processing day '$day'"
               varname="DESK_ID_$i"
               echo "test '$varname'"
-              eval desk_id_specific=\$$varname
+              desk_id_specific=$(env | grep "^$varname=" | cut -d '=' -f2-)
               if [ -n "$desk_id_specific" ]; then
                   desk_id=$desk_id_specific
               else
