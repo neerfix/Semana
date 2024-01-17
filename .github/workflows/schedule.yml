@@ -7,17 +7,18 @@ on:
 jobs:
   curl-post:
     runs-on: ubuntu-latest
+    env:
+      DESK_ID_0: ${{ secrets.DESK_ID_0 }}
+      DESK_ID_1: ${{ secrets.DESK_ID_1 }}
+      DESK_ID_2: ${{ secrets.DESK_ID_2 }}
+      DESK_ID_3: ${{ secrets.DESK_ID_3 }}
+      DESK_ID_4: ${{ secrets.DESK_ID_4 }}
     steps:
       - name: Get my place on semana for all days
         id: loop
         run: |
           echo "Looping over days"
           echo "${{ toJson(steps.loop.outputs) }}"
-          DESK_ID_0: ${{ secrets.DESK_ID_0 }}
-          DESK_ID_1: ${{ secrets.DESK_ID_1 }}
-          DESK_ID_2: ${{ secrets.DESK_ID_2 }}
-          DESK_ID_3: ${{ secrets.DESK_ID_3 }}
-          DESK_ID_4: ${{ secrets.DESK_ID_4 }}
           for i in {0..5}; do
             day=$(date --date="3 weeks $i days" +%Y-%m-%d)
             if [ $(date -d "$day" +%u) -le 5 ]; then
