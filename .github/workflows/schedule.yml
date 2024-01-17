@@ -17,7 +17,8 @@ jobs:
             day=$(date --date="3 weeks $i days" +%Y-%m-%d)
             if [ $(date -d "$day" +%u) -le 5 ]; then
               echo "Processing day '$day'"
-              desk_id_specific=$(eval echo \$\{secrets.DESK_ID_$i\})
+              varname="secrets.DESK_ID_$day"
+              eval desk_id_specific=\$$varname
               if [ -n "$desk_id_specific" ]; then
                   desk_id=$desk_id_specific
               else
