@@ -33,7 +33,7 @@ jobs:
                 -H 'cookie: ${{ secrets.COOKIE }}' \
                 -H 'origin: https://app.semana.io' \
                 -H 'pragma: no-cache' \
-                -H 'referer: https://app.semana.io/cospirit/floorplan?d='${{$day}}'&f=740' \
+                -H 'referer: https://app.semana.io/cospirit/floorplan?d=${{$day}}&f=740' \
                 -H 'sec-ch-ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
                 -H 'sec-ch-ua-mobile: ?0' \
                 -H 'sec-ch-ua-platform: "Linux"' \
