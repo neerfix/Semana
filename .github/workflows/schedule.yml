@@ -18,11 +18,12 @@ jobs:
             if [ $(date -d "$day" +%u) -le 5 ]; then
               echo "Processing day '$day'"
               varname="secrets.DESK_ID_$day"
+              echo "test '$varname'"
               eval desk_id_specific=\$$varname
               if [ -n "$desk_id_specific" ]; then
                   desk_id=$desk_id_specific
               else
-                  desk_id=${secrets.DESK_ID}
+                  desk_id=${{secrets.DESK_ID}}
               fi
               curl 'https://app.semana.io/api/bookings/' \
                 -H 'authority: app.semana.io' \
