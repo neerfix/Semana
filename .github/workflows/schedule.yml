@@ -1,4 +1,4 @@
-name: Get my place on Semana
+name: Automate my Semana
 on:
   push:
   workflow_dispatch:  
@@ -13,6 +13,11 @@ jobs:
       DESK_ID_2: ${{ secrets.DESK_ID_2 }}
       DESK_ID_3: ${{ secrets.DESK_ID_3 }}
       DESK_ID_4: ${{ secrets.DESK_ID_4 }}
+      STATUS_0: ${{ secrets.STATUS_0 }}
+      STATUS_1: ${{ secrets.STATUS_1 }}
+      STATUS_2: ${{ secrets.STATUS_2 }}
+      STATUS_3: ${{ secrets.STATUS_3 }}
+      STATUS_4: ${{ secrets.STATUS_4 }}
     steps:
       - name: Get my place on semana for all days
         id: loop
@@ -23,13 +28,21 @@ jobs:
             day=$(date --date="3 weeks $i days" +%Y-%m-%d)
             if [ $(date -d "$day" +%u) -le 5 ]; then
               echo "Processing day '$day'"
-              varname="DESK_ID_$i"
-              echo "test '$varname'"
-              desk_id_specific=$(env | grep "^$varname=" | cut -d '=' -f2-)
+              desk="DESK_ID_$i"
+              echo "test '$desk'"
+              desk_id_specific=$(env | grep "^$desk=" | cut -d '=' -f2-)
               if [ -n "$desk_id_specific" ]; then
                   desk_id=$desk_id_specific
               else
                   desk_id=${{secrets.DESK_ID}}
+              fi
+              status="STATUS_$i"
+              echo "test '$status'"
+              status_specific=$(env | grep "^$status=" | cut -d '=' -f2-)
+              if [ -n "$status_specific" ]; then
+                  desk_id=$status_specific
+              else
+                  desk_id=${{secrets.STATUS}}
               fi
               curl 'https://app.semana.io/api/bookings/' \
                 -H 'authority: app.semana.io' \
@@ -40,7 +53,7 @@ jobs:
                 -H 'cookie: ${{ secrets.COOKIE }}' \
                 -H 'origin: https://app.semana.io' \
                 -H 'pragma: no-cache' \
-                -H 'referer: https://app.semana.io/cospirit/floorplan?d=$day&f=740' \
+                -H 'referer: https://app.semana.io/${{ secrets.COMPANY }}/floorplan?d=$day&f=740' \
                 -H 'sec-ch-ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"' \
                 -H 'sec-ch-ua-mobile: ?0' \
                 -H 'sec-ch-ua-platform: "Linux"' \
