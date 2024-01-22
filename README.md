@@ -10,10 +10,13 @@ To get your information, open dev console and get the information in `POST` requ
 - Fork this repo.
 - Go to your `settings > Security > Secrets and variables > Actions` and add this :
 
+  - `COMPANY` -> if you want set your place for 'cospirit' company, set value at `cospirit`. (You can find it in Url of your semana's company)
   - `COLLABORATOR_ID` -> `your_collaborator_id`
   - `COOKIE` -> `your_cookie` (3 cookies is set by semana, take `sid` cookie value.
   - `DESK_ID` -> `your_desk_id`
-  - `DESK_ID_[0-5]` -> Change your desk on specific days of weeks (0 = monday; ... ; 4 = friday). If `DESK_ID_[0-5]` exist, is use in script, else use default `DESK_ID`
+  - `DESK_ID_[0-4]` -> Change your desk on specific days of weeks (0 = monday; ... ; 4 = friday). If `DESK_ID_[0-4]` exist, is use in script, else use default `DESK_ID`
+  - `STATUS` -> Set by default `6a0dffcb-5ab3-4108-9fde-4a834eeb8d9e` (On local company)
+  - `STATUS_[0-4]` -> Same as `DESK_ID_[0-4]`, you can specify a day to remote with this value : `28b83f47-0221-4dac-b3c0-f6a8690e64b3`
 
 ### Get Informations
 
